@@ -95,6 +95,7 @@ static int terminate_log_line(char *buf, int len)
 
 #define LOG_BUF_LEN 192
 
+__weak
 __format_printf(5, 6)
 int __logger_log(logger_t *ctx, int log_level, const char *file, unsigned long line,
 		 const char *fmt, ...)
