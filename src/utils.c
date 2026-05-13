@@ -12,6 +12,13 @@
 
 #include <utils/utils.h>
 
+#define _IS_ENABLED_SELFTEST_ON 1
+_Static_assert(IS_ENABLED(_IS_ENABLED_SELFTEST_ON) == 1,
+	       "IS_ENABLED(): defined-as-1 flag must evaluate to 1");
+_Static_assert(IS_ENABLED(_IS_ENABLED_SELFTEST_OFF) == 0,
+	       "IS_ENABLED(): undefined flag must evaluate to 0");
+#undef _IS_ENABLED_SELFTEST_ON
+
 int randint(int limit)
 {
 	int r;
@@ -181,6 +188,13 @@ int add_iso8601_utc_datetime(char* buf, size_t size) {
 #elif defined(__ZEPHYR__)
 
 #include <sys/time.h>
+
+int add_iso8601_utc_datetime(char *buf, size_t size)
+{
+	ARG_UNUSED(buf);
+	ARG_UNUSED(size);
+	return 0;
+}
 
 #elif defined(__BARE_METAL__)
 
